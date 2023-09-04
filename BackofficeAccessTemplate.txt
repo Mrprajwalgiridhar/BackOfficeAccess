@@ -1,0 +1,68 @@
+i need an html which will create an impex and provide to user
+
+Step 1 : User will enter and email in input. ex: prajwal.g@ff.com
+
+Java script : when the user enters the email it should decode the email and create 3 properties and store it in variables.
+
+Ex:
+
+firstName = Prajwal (the first word of name should be in Capital)
+lastName = G (the first word of name should be in Capital)
+userName = prajwal.g (everything should be in lowercase)
+
+Step 2 : user will select which access he need in dropdown option 
+
+Ex: there will be more option with regions where user is selecting the region to create an impex to provide the access to the email entered
+
+Java script : when the user an region from dropdown option it should go to the xl stored in a path and take a accessType code from the xl sheet respective to the region (in Xl sheet there will be a sheet called AccessType. in that sheet there will be a table with 2 column A(regions) and B(accessTypes)).and store that in a variable property.
+
+for your refrence -> table
+
+Regions	AccessTypes
+Admin	HCBO_Admin_Group
+ CA	HCBO_CA_Group
+ US	HCBO_US_Group
+ BR	HCBO_BR_Group
+ CO	HCBO_CO_Group
+ MX	HCBO_MX_Group
+ ANZ	HCBO_ANZ_Group
+ KH	HCBO_KH_Group
+ CN	HCBO_CN_Group
+ IND	HCBO_IND_Group
+ ID	HCBO_ID_Group
+ JP	HCBO_JP_Group
+ MY	HCBO_MY_Group
+ MM	HCBO_MM_Group
+ PH	HCBO_PH_Group
+ SG	HCBO_SG_Group
+ TH	HCBO_TH_Group
+ VN	HCBO_VN_Group
+ DK	HCBO_DK_Group
+ FI	HCBO_FI_Group
+ FR	HCBO_FR_Group
+ DE	HCBO_DE_Group
+ IE	HCBO_IE_Group
+ IL	HCBO_IL_Group
+ IT	HCBO_IT_Group
+ NO	HCBO_NO_Group
+ PT	HCBO_PT_Group
+ ES	HCBO_ES_Group
+ SE	HCBO_SE_Group
+ GB	HCBO_GB_Group
+ EG	HCBO_EG_Group
+
+
+Step 3 : User will click on "generate impex" button and impex should be created.
+
+java script : when the user click on the button then javascript should fetch the impex file stored in a path and replace with the variables stored and display the text in text area.
+
+Ex:
+
+in impex there are some place holders like follows:
+<userName> = userName
+<firstName> = firstName
+<lastName> = lastName
+<accessType> = accessType
+
+these should be replaced with the stored variables.
+

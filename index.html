@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Back-Office Access</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css">
+
+
+    <style>
+        body {
+            font-family: 'Poppins';
+            font-size: 22px;
+        }
+
+        #copyButton {
+            position: absolute;
+            top: 1px;
+            right: 1px;
+        }
+
+        .impexArea {
+            position: relative;
+        }
+
+        .impexText {
+            border-radius: 25px;
+        }
+
+        .alert_position {
+            position: absolute;
+            top: 120px;
+            width: 70%;
+            text-align: center;
+            height: 45px;
+            padding: 15px;
+            justify-content: center;
+        }
+
+        .newButton {
+            position: absolute;
+            right: 0px;
+            top: 14px;
+        }
+
+        .inputFileSpace {
+            position: relative;
+        }
+    </style>
+    <style>
+        /* Custom CSS */
+        .select2-container--default .select2-selection--multiple {
+            min-height: 40px;
+            /* Change the height as needed */
+            font-size: 15px;
+            /* Change the font size as needed */
+            padding: 2px;
+
+        }
+
+        .select2-container--default .select2-results__option {
+            font-size: 14px;
+            /* Change the option height as needed */
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+
+
+
+
+
+
+
+
+
+    <div class="container bg-white mt-3 p-5 shadow shadowThick" style="border-radius: 25px; width: 80%;">
+        <h3><b>Back-Office Access :</b></h3><br><br>
+
+        <div class="alert alert_position fade" role="alert" style="font-size: small;">
+        </div>
+
+        <div class="inputFileSpace">
+            <button class="newButton btn btn-outline-success shadow-sm" style="font-size: 12px; border-radius: 25px;"
+                onclick="refreshPage()" id="ClearButton"><b><i class="fa fa-refresh" aria-hidden="true"></i>
+                    Clear</b></button>
+        </div>
+        <p class="mt-3" style="font-size: medium;"><b>1. &nbsp; Enter User mail id :</b></p>
+        <div class="input-group inputFileSpace">
+            <input type="text" class="form-control" id="inputUserEmail" oninput="decodeProperties(event)">
+        </div><br>
+
+        <p class="mt-3" style="font-size: medium;"><b>3. &nbsp; Select Region :</b></p>
+        <div class="input-group form-group">
+            <select id="mySelect" class="form-select" multiple="multiple" onchange="handleSelectChange()">
+                <option value="HCBO_Admin_Group">Admin (HCBO_Admin_Group)</option>
+                <option value="HCBO_ANZ_Group">Australia & New Zealand - ANZ (HCBO_ANZ_Group)</option>
+                <option value="HCBO_BR_Group">Brazil - BR (HCBO_BR_Group)</option>
+                <option value="HCBO_CA_Group">Canada - CA (HCBO_CA_Group)</option>
+                <option value="HCBO_CN_Group">China - CN (HCBO_CN_Group)</option>
+                <option value="HCBO_CO_Group">Colombia - CO (HCBO_CO_Group)</option>
+                <option value="HCBO_KH_Group">Cambodia - KH (HCBO_KH_Group)</option>
+                <option value="HCBO_DK_Group">Denmark - DK (HCBO_DK_Group)</option>
+                <option value="HCBO_EG_Group">Egypt - EG (HCBO_EG_Group)</option>
+                <option value="HCBO_FI_Group">Finland - FI (HCBO_FI_Group)</option>
+                <option value="HCBO_FR_Group">France - FR (HCBO_FR_Group)</option>
+                <option value="HCBO_DE_Group">Germany - DE (HCBO_DE_Group)</option>
+                <option value="HCBO_IND_Group">India - IND (HCBO_IND_Group)</option>
+                <option value="HCBO_IE_Group">Ireland - IE (HCBO_IE_Group)</option>
+                <option value="HCBO_IT_Group">Italy - IT (HCBO_IT_Group)</option>
+                <option value="HCBO_IL_Group">Israel - IL (HCBO_IL_Group)</option>
+                <option value="HCBO_ID_Group">Indonesia - ID (HCBO_ID_Group)</option>
+                <option value="HCBO_JP_Group">Japan - JP (HCBO_JP_Group)</option>
+                <option value="HCBO_MX_Group">Mexico - MX (HCBO_MX_Group)</option>
+                <option value="HCBO_MM_Group">Myanmar - MM (HCBO_MM_Group)</option>
+                <option value="HCBO_MY_Group">Malaysia - MY (HCBO_MY_Group)</option>
+                <option value="HCBO_NO_Group">Norway - NO (HCBO_NO_Group)</option>
+                <option value="HCBO_PH_Group">Philippines - PH (HCBO_PH_Group)</option>
+                <option value="HCBO_PT_Group">Portugal - PT (HCBO_PT_Group)</option>
+                <option value="HCBO_SE_Group">Sweden - SE (HCBO_SE_Group)</option>
+                <option value="HCBO_SG_Group">Singapore - SG (HCBO_SG_Group)</option>
+                <option value="HCBO_ES_Group">Spain - ES (HCBO_ES_Group)</option>
+                <option value="HCBO_TH_Group">Thailand - TH (HCBO_TH_Group)</option>
+                <option value="HCBO_US_Group">United States - US (HCBO_US_Group)</option>
+                <option value="HCBO_VN_Group">Vietnam - VN (HCBO_VN_Group)</option>
+            </select>
+        </div><br>
+
+        <div class="text-center">
+            <button class="btn btn-success text-center shadow" type="button" id="generateButton"
+                style="border-radius: 25px;" onclick="generateImpex()">Generate
+                Impex</button>
+        </div>
+
+
+        <div class="impexArea">
+            <p class="mb-4" style="font-size: medium;"><b>3. &nbsp; Impex :</b></p>
+            <div>
+                <button class="btn btn-outline-secondary shadow" id="copyButton" onclick="copyText()"
+                    style="font-size: 12px; border-radius: 25px;"> <b>
+                        Copy</b></button>
+            </div>
+            <div class="form-floating">
+                <textarea class="impexText form-control bg-dark text-white"
+                    style="height: 500px; font-family: Consolas, Monaco, 'Courier New', Courier, monospace; overflow-x: auto; padding: 20px;"
+                    id="floatingTextarea"></textarea>
+                <label class="" style="font-size: small;" for="floatingTextarea">Generated Impex:</label>
+            </div>
+        </div>
+
+    </div>
+    <br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="BackOfficeAccess.js"></script>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#mySelect').select2();
+        });
+    </script>
+
+    <script>
+
+
+    </script>
+
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+
+
+</body>
+
+</html>

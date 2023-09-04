@@ -1,0 +1,16 @@
+
+# BackOffice Access
+
+$passwordEncoding=md5
+$password=gss@admin
+$setPassword=@password[translator=de.hybris.platform.impex.jalo.translators.ConvertPlaintextToEncodedUserPasswordTranslator][default='$passwordEncoding:$password']
+
+INSERT Employee;uid[unique=true];name;groups(uid);backOfficeLoginDisabled;$setPassword
+
+;<userName>;<firstName> <lastName>;<accessType>;false;
+
+
+# If Required (Optional)
+
+UPDATE Employee;uid[unique=true];loginDisabled;
+;<userName>;false;
